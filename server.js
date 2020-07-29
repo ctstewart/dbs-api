@@ -2,6 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const colors = require('colors')
+const errorHandler = require('./middleware/error')
 const connectDB = require('./config/db')
 
 // Load env vars
@@ -9,6 +10,10 @@ dotenv.config({ path: './config/config.env' })
 
 // Connect to database
 connectDB()
+
+// Route fjles
+const devices = require('./routes/devices')
+const auth = require('./routes/auth')
 
 const app = express()
 
@@ -19,6 +24,12 @@ app.use(express.json())
 if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'))
 }
+
+// Mount routers
+app.use('/api/v1/devices', devices)
+app.use('/api/v1/auth', auth)
+
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 
