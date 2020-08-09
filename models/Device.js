@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-// const slugify = require('slugify')
+const slugify = require('slugify')
 
 const DeviceSchema = new mongoose.Schema({
 	name: {
@@ -27,13 +27,13 @@ const DeviceSchema = new mongoose.Schema({
 			'Google',
 		],
 	},
-	storageCapacity: {
-		type: String,
-		enum: ['16GB', '32GB', '64GB', '128GB', '256GB', '512GB', '1TB'],
-	},
 	fullRetail: {
 		type: Number,
 		required: [true, 'Please add the full retail price'],
+	},
+	storageCapacity: {
+		type: String,
+		enum: ['16GB', '32GB', '64GB', '128GB', '256GB', '512GB', '1TB'],
 	},
 })
 
