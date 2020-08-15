@@ -38,8 +38,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 // @route    GET /api/v1/auth/me
 // @access   Private
 exports.getMe = asyncHandler(async (req, res, next) => {
-	// user is already available in req
-	// due to the protect middleware
+	// user is already available in req due to the protect middleware
 	const user = req.user
 
 	res.status(200).json({
