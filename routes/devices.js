@@ -4,6 +4,7 @@ const {
 	getDevices,
 	getDevice,
 	createDevice,
+	updateDevice,
 } = require('../controllers/devices')
 
 const router = express.Router()
@@ -18,5 +19,6 @@ router.route('/')
 // prettier-ignore
 router.route('/:id')
 	.get(protect, getDevice)
+	.put(protect, authorize('admin', 'superadmin'), updateDevice)
 
 module.exports = router

@@ -58,3 +58,27 @@ exports.createDevice = asyncHandler(async (req, res, next) => {
 		data: device,
 	})
 })
+
+// @desc     Update device
+// @route    PUT /api/v1/devices/:id
+// @access   Private, Admins
+exports.updateDevice = asyncHandler(async (req, res, next) => {
+	const device = await Device.findByIdAndUpdate(req.params.id, req.body, {
+		new: true,
+		runValidators: true,
+	})
+
+	if (!device) {
+		return next(
+			new ErrorResponse(
+				`Resource not found with id of ${req.params.id}`,
+				404
+			)
+		)
+	}
+
+	res.status(200).json({
+		success: true,
+		data: device,
+	})
+})
