@@ -2,7 +2,10 @@ const crypto = require('crypto')
 const ErrorResponse = require('../utils/errorResponse')
 const asyncHandler = require('../middleware/async')
 const sendEmail = require('../utils/sendEmail')
+
+// Models
 const User = require('../models/User')
+const LoginLog = require('../models/Log')
 
 // @desc     Login user
 // @route    POST /api/v1/auth/login
@@ -30,6 +33,8 @@ exports.login = asyncHandler(async (req, res, next) => {
 	if (!isMatch) {
 		return next(new ErrorResponse('Invalid credentials', 401))
 	}
+
+	await Log.create({ category: 'login', user: user.id })
 
 	sendTokenResponse(user, 200, res)
 })
