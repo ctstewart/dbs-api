@@ -3,50 +3,55 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const UserSchema = new mongoose.Schema({
-	firstName: {
-		type: String,
-		required: [true, 'Please add a first name'],
+const UserSchema = new mongoose.Schema(
+	{
+		firstName: {
+			type: String,
+			required: [true, 'Please add a first name'],
+		},
+		lastName: {
+			type: String,
+			required: [true, 'Please add a last name'],
+		},
+		email: {
+			type: String,
+			required: [true, 'Please add an email'],
+			unique: true,
+			match: [
+				/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+				'Please add a valid email',
+			],
+		},
+		role: {
+			type: String,
+			enum: ['user', 'admin', 'superadmin'],
+			default: 'user',
+		},
+		store: {
+			type: String,
+			required: [true, 'Please include the store'],
+		},
+		district: {
+			type: String,
+			required: [true, 'Please include the district'],
+		},
+		password: {
+			type: String,
+			required: [true, 'Please add a password'],
+			minlength: 6,
+			select: false,
+		},
+		resetPasswordToken: String,
+		resetPasswordExpire: Date,
+		createdAt: {
+			type: Date,
+			default: Date.now,
+		},
 	},
-	lastName: {
-		type: String,
-		required: [true, 'Please add a last name'],
-	},
-	email: {
-		type: String,
-		required: [true, 'Please add an email'],
-		unique: true,
-		match: [
-			/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-			'Please add a valid email',
-		],
-	},
-	role: {
-		type: String,
-		enum: ['user', 'admin', 'superadmin'],
-		default: 'user',
-	},
-	store: {
-		type: String,
-		required: [true, 'Please include the store'],
-	},
-	district: {
-		type: String,
-		required: [true, 'Please include the district'],
-	},
-	password: {
-		type: String,
-		required: [true, 'Please add a password'],
-		minlength: 6,
-		select: false,
-	},
-	resetPasswordToken: String,
-	resetPasswordExpire: Date,
-	createdAt: {
-		type: Date,
-		default: Date.now,
-	},
-})
+	{
+		timestamps: true,
+	}
+)
 
 // Encrypt password using bcrypt
 UserSchema.pre('save', async function (next) {
