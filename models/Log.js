@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const LoginLogSchema = new mongoose.Schema(
+const LogSchema = new mongoose.Schema(
 	{
 		category: {
 			type: String,
@@ -16,4 +16,4 @@ const LoginLogSchema = new mongoose.Schema(
 	{ timestamps: true }
 )
 
-module.exports = mongoose.model('LoginLog', LoginLogSchema)
+module.exports = mongoose.model('Log', LogSchema)
