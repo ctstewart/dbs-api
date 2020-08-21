@@ -6,6 +6,7 @@ const colors = require('colors')
 // Load models
 const Device = require('./models/Device')
 const User = require('./models/User')
+const Log = require('./models/Log')
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI, {
@@ -39,7 +40,8 @@ const importData = async () => {
 const deleteData = async () => {
 	try {
 		await Device.deleteMany()
-		await User.create(users)
+		await User.deleteMany()
+		await Log.deleteMany()
 		console.log('Data Destroyed...'.red.inverse)
 		process.exit()
 	} catch (err) {
