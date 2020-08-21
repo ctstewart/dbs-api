@@ -101,4 +101,8 @@ UserSchema.methods.getResetPasswordToken = function () {
 	return resetToken
 }
 
+UserSchema.pre('remove', async function (next) {
+	await this.model('Log').deleteMany({ user: this._id })
+})
+
 module.exports = mongoose.model('User', UserSchema)
