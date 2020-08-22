@@ -15,6 +15,7 @@ connectDB()
 const devices = require('./routes/devices')
 const auth = require('./routes/auth')
 const logs = require('./routes/logs')
+const users = require('./routes/users')
 
 const app = express()
 
@@ -30,6 +31,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api/v1/devices', devices)
 app.use('/api/v1/auth', auth)
 app.use('/api/v1/logs', logs)
+app.use('/api/v1/users', users)
 
 app.use(errorHandler)
 
