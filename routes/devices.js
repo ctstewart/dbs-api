@@ -8,10 +8,10 @@ const {
 } = require('../controllers/devices')
 
 const Device = require('../models/Device')
-const advancedResults = require('../middleware/advancedResults')
 
 const router = express.Router()
 
+const advancedResults = require('../middleware/advancedResults')
 const { protect, authorize } = require('../middleware/auth')
 
 // prettier-ignore
