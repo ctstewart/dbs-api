@@ -9,9 +9,12 @@ const router = express.Router()
 const advancedResults = require('../middleware/advancedResults')
 const { protect, authorize } = require('../middleware/auth')
 
+router.use(protect)
+router.use(authorize('admin', 'superadmin'))
+
 // prettier-ignore
 router.route('/')
-	.get(protect, authorize('admin', 'superadmin'), advancedResults(Log, {
+	.get(advancedResults(Log, {
 		path: 'user',
 		select: 'firstName lastName email store district'
 	}), getLogs)
