@@ -51,17 +51,20 @@ exports.updateDevice = asyncHandler(async (req, res, next) => {
 		runValidators: true,
 	})
 
-	if (!device) {
-		return next(
-			new ErrorResponse(
-				`Resource not found with id of ${req.params.id}`,
-				404
-			)
-		)
-	}
-
 	res.status(200).json({
 		success: true,
 		data: device,
+	})
+})
+
+// @desc     Delete device
+// @route    DELETE /api/v1/devices/:id
+// @access   Private, Admins
+exports.deleteDevice = asyncHandler(async (req, res, next) => {
+	await Device.findByIdAndDelete(req.params.id)
+
+	res.status(200).json({
+		success: true,
+		data: {},
 	})
 })

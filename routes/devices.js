@@ -5,6 +5,7 @@ const {
 	getDevice,
 	createDevice,
 	updateDevice,
+	deleteDevice,
 } = require('../controllers/devices')
 
 const Device = require('../models/Device')
@@ -14,14 +15,17 @@ const router = express.Router()
 const advancedResults = require('../middleware/advancedResults')
 const { protect, authorize } = require('../middleware/auth')
 
+router.use(protect)
+
 // prettier-ignore
 router.route('/')
-	.get(protect, advancedResults(Device), getDevices)
-	.post(protect, authorize('admin', 'superadmin'), createDevice)
+	.get(advancedResults(Device), getDevices)
+	.post(authorize('admin', 'superadmin'), createDevice)
 
 // prettier-ignore
 router.route('/:id')
-	.get(protect, getDevice)
-	.put(protect, authorize('admin', 'superadmin'), updateDevice)
+	.get(getDevice)
+	.put(authorize('admin', 'superadmin'), updateDevice)
+	.delete(authorize('admin', 'superadmin'), deleteDevice)
 
 module.exports = router
