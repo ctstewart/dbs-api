@@ -26,7 +26,7 @@ exports.getUser = asyncHandler(async (req, res, next) => {
 // @route    POST /api/v1/users
 // @access   Private, Admins
 exports.createUser = asyncHandler(async (req, res, next) => {
-	const { firstName, lastName, email, store, district } = req.body
+	const { firstName, lastName, email, store, district, password } = req.body
 
 	const user = await User.create({
 		firstName,
@@ -34,6 +34,7 @@ exports.createUser = asyncHandler(async (req, res, next) => {
 		email,
 		store,
 		district,
+		password,
 	})
 
 	res.status(201).json({
