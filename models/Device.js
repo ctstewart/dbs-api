@@ -37,6 +37,10 @@ const DeviceSchema = new mongoose.Schema(
 			enum: ['N/A', '16GB', '32GB', '64GB', '128GB', '256GB', '512GB', '1TB'],
 			required: [true, 'Please add the storage capacity']
 		},
+		category: {
+			type: String,
+			enum: ['Phone', 'Tablet', 'Smartwatch', 'Other']
+		}
 	},
 	{
 		timestamps: true,
