@@ -39,7 +39,8 @@ const DeviceSchema = new mongoose.Schema(
 		},
 		category: {
 			type: String,
-			enum: ['Phone', 'Tablet', 'Smartwatch', 'Other']
+			enum: ['Phone', 'Tablet', 'Smartwatch', 'Other'],
+			required: [true, 'Please add a category']
 		}
 	},
 	{
