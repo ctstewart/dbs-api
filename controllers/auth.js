@@ -93,7 +93,8 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 		console.log('Forgot password route requires a valid user')
 		return res.status(200).json({
 			success: true,
-			data: 'An email will be sent if the user exists',
+			data:
+				'If the provided email address exists in our database, we send instructions to it so you can reset your password.',
 		})
 	}
 
