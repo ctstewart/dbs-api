@@ -26,7 +26,6 @@ const DeviceSchema = new mongoose.Schema(
 				'Kyocera',
 				'Alcatel',
 				'Google',
-				'Alcatel',
 			],
 		},
 		fullRetail: {
