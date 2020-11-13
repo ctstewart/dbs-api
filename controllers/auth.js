@@ -78,6 +78,11 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 	}
 
 	user.password = req.body.newPassword
+
+	if (user.forceNewPassword) {
+		user.forceNewPassword = false
+	}
+
 	await user.save()
 
 	sendTokenResponse(user, 200, res)
