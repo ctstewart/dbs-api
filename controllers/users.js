@@ -28,6 +28,8 @@ exports.getUser = asyncHandler(async (req, res, next) => {
 exports.createUser = asyncHandler(async (req, res, next) => {
 	const { firstName, lastName, email, store, district, password } = req.body
 
+	const forceNewPassword = true
+
 	const user = await User.create({
 		firstName,
 		lastName,
@@ -35,6 +37,7 @@ exports.createUser = asyncHandler(async (req, res, next) => {
 		store,
 		district,
 		password,
+		forceNewPassword
 	})
 
 	res.status(201).json({
