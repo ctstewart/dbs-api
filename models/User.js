@@ -41,10 +41,6 @@ const UserSchema = new mongoose.Schema(
 			minlength: 6,
 			select: false,
 		},
-		hasSeenNewChanges: {
-			type: Boolean,
-			default: false
-		},
 		forceNewPassword: {
 			type: Boolean,
 			default: false
