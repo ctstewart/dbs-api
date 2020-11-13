@@ -35,6 +35,8 @@ app.use(cookieParser())
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'))
+} else if (process.env.NODE_ENV === 'production') {
+	app.use(morgan('common'))
 }
 
 // Set static folder
