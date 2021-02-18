@@ -36,7 +36,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 	}
 
 	if (user.role === 'user') {
-		await Log.create({ category: 'login', user: user.id })
+		await Log.create({ category: 'login', user })
 	}
 
 	sendTokenResponse(user, 200, res)
