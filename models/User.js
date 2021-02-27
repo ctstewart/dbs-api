@@ -69,18 +69,16 @@ UserSchema.pre('save', async function (next) {
 
 // Sign JWT and return
 UserSchema.methods.getSignedJwtToken = function () {
-	// let midnight = new Date()
-	// midnight = midnight.setHours(0, 0, 0, 0)
-	// midnight = midnight.getTime()
+	const now = new Date()
 
-	// // now in milliseconds
-	// let now = new Date().getTime()
+	let midnight = new Date()
+	midnight.setDate(now.getDate() + 1)
+	midnight.setHours(0, 0, 0, 0)
 
-	// console.log(midnight)
-	// console.log(now)
+	msToMidnight = midnight.getTime() - now.getTime()
 
 	return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-		expiresIn: '1d',
+		expiresIn: msToMidnight,
 	})
 }
 

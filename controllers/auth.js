@@ -182,8 +182,14 @@ const sendTokenResponse = (user, statusCode, res) => {
 	// Create token
 	const token = user.getSignedJwtToken()
 
+	const now = new Date()
+
+	let midnight = new Date()
+	midnight.setDate(now.getDate() + 1)
+	midnight.setHours(0, 0, 0, 0)
+
 	const options = {
-		expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+		expires: midnight,
 		httpOnly: true,
 	}
 
