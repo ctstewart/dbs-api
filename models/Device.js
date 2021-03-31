@@ -41,7 +41,15 @@ const DeviceSchema = new mongoose.Schema(
 			type: String,
 			enum: ['Phone', 'Tablet', 'Smartwatch', 'Other'],
 			required: [true, 'Please add a category']
-		}
+		},
+		// Device Payment Length options in months
+		dppLength: [
+			{
+				type: Number,
+				enum: [24, 30],
+				default: 24
+			}
+		]
 	},
 	{
 		timestamps: true,
