@@ -17,10 +17,7 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			required: [true, 'Please add an email'],
 			unique: true,
-			match: [
-				/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-				'Please add a valid email',
-			],
+			match: [/.+@.+\..+/, 'Please add a valid email'],
 		},
 		role: {
 			type: String,
@@ -43,7 +40,7 @@ const UserSchema = new mongoose.Schema(
 		},
 		forceNewPassword: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		resetPasswordToken: String,
 		resetPasswordExpire: Date,
