@@ -11,6 +11,7 @@ const rateLimit = require('express-rate-limit')
 const hpp = require('hpp')
 const errorHandler = require('./middleware/error')
 const connectDB = require('./config/db')
+const cors = require('cors')
 
 // Load env vars
 dotenv.config({ path: './config/config.env' })
@@ -25,6 +26,13 @@ const logs = require('./routes/logs')
 const users = require('./routes/users')
 
 const app = express()
+
+const corsOptions = {
+	origin: process.env.CORS_ALLOWED,
+	credentials: true,
+}
+
+app.use(cors(corsOptions))
 
 // Body parser
 app.use(express.json())
